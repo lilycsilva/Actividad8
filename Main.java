@@ -9,9 +9,22 @@ public class Main {
         System.out.println("Deck: ");
         System.out.println(a);
 
-        System.out.println("Shuffle. Se mezclo el Deck: ");
+        //Head
+        Card head;
+        head = a.deal();
+        System.out.println("Head: " +head);
+        System.out.println("Quedan 51 cartas en deck. \n");
+
+        //Shuffle
+        System.out.println("Shuffle. Se mezcló el Deck: ");
         a.shuffle(1000);
         System.out.println(a);
+
+        //Pick
+        Card pick;
+        pick = a.deal();
+        System.out.println("Pick: " +pick);
+        System.out.println("Quedan 50 cartas en deck. \n");
 
         //Hand
         for ( i = 0; i < 5; i++ )
@@ -19,20 +32,13 @@ public class Main {
             hand[i] = a.deal();
         }
 
-        System.out.println("NOTA: Los diamantes 'd' y los corazones 'c' son color rojo y los treboles 't' y las picas 'p' son color negro \n");
-
-        System.out.println("Head: Ad");
-        System.out.println("Quedan 51 cartas en deck");
-
-        System.out.println("Pick: Ks");
-        System.out.println("Quedan 50 cartas en deck");
-
         System.out.print("Hand: ");
         for ( i = 0; i < 5; i++ )
             System.out.print(hand[i] + "  ");
         System.out.println();
-        System.out.println("Quedan 45 cartas en el Deck");
+        System.out.println("Quedan 45 cartas en el Deck. \n");
 
+        System.out.println("NOTA: Los diamantes 'd' y los corazones 'c' son color rojo y los treboles 't' y las picas 'p' son color negro.");
     }
 }
 
@@ -42,7 +48,7 @@ class Deck
     public static final int NCARDS = 52;
 
     private Card[] deckOfCards;         // Contiene las 52 cartas
-    private int currentCard;            // Head
+    private int currentCard;
 
     public Deck( )
     {
@@ -54,12 +60,10 @@ class Deck
             for ( int valor = 1; valor <= 13; valor++ )
                 deckOfCards[i++] = new Card(palo, valor);
 
-        currentCard = 0;
+            currentCard = 0;
     }
 
-    /*
-       Shuffle del deck
-    */
+       //Shuffle del deck
     public void shuffle(int n)
     {
         int i, j, k;
@@ -69,19 +73,16 @@ class Deck
             i = (int) ( NCARDS * Math.random() );  // Elige 2 cartas al azar
             j = (int) ( NCARDS * Math.random() );  // en el deck
 
-	  /*
-	     swap these randomly picked cards
-	   */
+	     //swap de las cartas elegidas al azar
             Card tmp = deckOfCards[i];
             deckOfCards[i] = deckOfCards[j];
             deckOfCards[j] = tmp;
         }
 
+        currentCard = 0;
     }
 
-    /*
-       Deal deckOfCards[currentCard] out
-    */
+       //Deal deckOfCards[currentCard] out - Remover la carta del deck
     public Card deal()
     {
         if ( currentCard < NCARDS )
@@ -91,7 +92,7 @@ class Deck
         else
         {
             System.out.println("Out of cards error");
-            return ( null );  // Error;
+            return ( null );  // Error
         }
     }
 
@@ -121,8 +122,7 @@ class Card
     public static final int DIAMANTES = 1;
 
     private static final String[] Palo = { "*", "d", "t", "c", "p"};
-    private static final String[] Valor = { "*", "*", "2", "3", "4",
-            "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
+    private static final String[] Valor = { "*", "*", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 
     private byte cardPalo;
     private byte cardValor;
@@ -158,7 +158,6 @@ class Card
     {
         return ( Valor[ cardValor ] );
     }
-
 
     public String toString()
     {
